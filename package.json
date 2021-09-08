@@ -1,0 +1,37 @@
+{
+  "name": "project8",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp-clean": "^0.4.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglify": "^3.0.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.3.4",
+    "browsersync": "0.0.1-security",
+    "changed": "0.0.2",
+    "concat": "^1.0.3",
+    "connect": "^3.7.0",
+    "cssnano": "^5.0.8",
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "image-min": "^0.3.2",
+    "imagemin": "^8.0.1",
+    "sass": "^1.39.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NidaZORLU/Project8.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NidaZORLU/Project8/issues"
+  },
+  "homepage": "https://github.com/NidaZORLU/Project8#readme"
+}
