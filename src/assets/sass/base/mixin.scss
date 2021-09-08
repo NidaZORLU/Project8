@@ -1,0 +1,35 @@
+//Mixins
+@mixin transitionEffect($par){
+  transition: $par all;
+  -webkit-transition: $par all;
+  -moz-transition: $par all;
+  -ms-transition: $par all;
+  -o-transition: $par all;
+}
+@mixin borderRadius{
+  border-radius: $par;
+  -webkit-transition: $par ;
+  -moz-transition: $par ;
+  -ms-transition: $par ;
+  -o-transition: $par ;
+
+}
+@mixin centerFlex{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin transformTranslate($x){
+  transform: translate($x);
+  -webkit-transform: translate($x);
+  -moz-transform: translate($x);
+  -ms-transform: translate($x);
+  -o-transform: translate($x);
+}
+@mixin transformTranslate($y){
+  transform: translate($y);
+  -webkit-transform: translate($y);
+  -moz-transform: translate($y);
+  -ms-transform: translate($y);
+  -o-transform: translate($y);
+}
