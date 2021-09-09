@@ -1,53 +1,39 @@
-const gulp = require('gulp');
-const uglify = require('gulp-uglify');
-const cleanCSS = require('gulp-clean-css');
-const concat = require('gulp-concat');
-const sass = require('gulp-sass');
+const gulp = require("gulp");
+const {series} = require("gulp");
+const cleanCss = require("gulp-clean-css");
+const uglify = require("gulp-uglify");
+const htmlmin = require("gulp-htmlmin");
 
-// gulp.task -> gorev olusturmak icin
-// gulp.src -> kaynak dosyalari
-// gulp.dest -> hedef dizinimiz
-// gulp.watch -> izleme ve gorev calistirma
-// pipe -> modify
-
-gulp.task('message',()=>{
-    console.log("Gulp running..");
-});
+const sass = require('gulp-sass')(require('sass'));
 
 
-gulp.task('kopyaHtml',()=>{
-    gulp.src('src/index.html')
-        .pipe(gulp.dest('./dist/'));
-})
-
-gulp.task('jsMin',()=>{
-    gulp.src('src/assets/js/script.js')
+jsMin = (cb)=>{
+    gulp.src("./src/scripts/*.scripts")
         .pipe(uglify())
-        .pipe(gulp.dest('./dist/js/'));
-});
+        .pipe(gulp.dest("./dist/scripts/"));
+    cb();
+}
 
-gulp.task('cssMin',()=>{
-    gulp.src('src/assets/css/style.css')
-        .pipe(cleanCSS())
-        .pipe(gulp.dest('./dist/css/'));
-});
+cssMin = (cb)=>{
+    gulp.src("./src/styles/*.styles")
+        .pipe(cleanCss())
+        .pipe(gulp.dest("./dist/styles/"));
+    cb();
+}
 
-gulp.task('jsCon',()=>{
-    gulp.src('src/assets/js/script.js')
-        .pipe(concat('all.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('./dist/js'));
-});
+htmlMin = (cb)=>{
+    gulp.src("./src/*.html")
+        .pipe(htmlmin({ collapseWhitespace: true }))
+        .pipe(gulp.dest("./dist/"));
+    cb();
+}
 
-gulp.task('sass',()=>{
-    gulp.src('src/assets/sass/style.scss')
+sassCom = (cb) => {
+    gulp.src('./src/sass/**/*.scss')
         .pipe(sass())
-        .pipe(gulp.dest('./dist/css/'));
-});
+        .pipe(gulp.dest( './dist/styles' + './src/styles'));
+    cb();
+}
 
-gulp.task('izle',()=>{
-    gulp.watch('src/assets/css/style.css',['cssMin']);
-    gulp.watch('src/assets/js/script.js',['jsCon']);
-})
 
-gulp.task('default',['message','imageMin','kopyaHtml','cssMin' ,'jsCon' , 'sass']);
+exports.default= series(jsMin, cssMin, htmlMin, sassCom);

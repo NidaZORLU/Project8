@@ -6,7 +6,7 @@
   -ms-transition: $par all;
   -o-transition: $par all;
 }
-@mixin borderRadius{
+@mixin borderRadius($par){
   border-radius: $par;
   -webkit-transition: $par ;
   -moz-transition: $par ;
