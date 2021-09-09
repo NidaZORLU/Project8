@@ -1,7 +1,42 @@
-@import "base/variables";
-@import "base/mixin";
-@import "base/reset";
-@import "typography/fonts";
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+//Mixins
+@mixin transitionEffect($par){
+  transition: $par all;
+  -webkit-transition: $par all;
+  -moz-transition: $par all;
+  -o-transition: $par all;
+}
+@mixin centerFlex{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin transformTranslate($x){
+  transform: translate($x);
+  -webkit-transform: translate($x);
+  -moz-transform: translate($x);
+  -ms-transform: translate($x);
+  -o-transform: translate($x);
+}
+@mixin transformTranslate($y){
+  transform: translate($y);
+  -webkit-transform: translate($y);
+  -moz-transform: translate($y);
+  -ms-transform: translate($y);
+  -o-transform: translate($y);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+//color
+$bg-color-1 : #fff;
+$bg-color-2 : rgba(0, 0, 0, 0.4);
+$bg-color-3 : lightblue;
+$bg-color-4 : steelblue;
+
 
 body {
   background-color: $bg-color-4;
@@ -17,7 +52,7 @@ body {
 .container {
   background-color: $bg-color-2;
   padding: 20px 40px;
-  @include borderRadius(5px);
+  border-radius: 5px;
 }
 
 .container h1 {
@@ -39,7 +74,7 @@ body {
   font-family: inherit;
   font-size: 16px;
   border: 0;
-  @include borderRadius(5px);
+  border-radius: 5px;
 }
 
 .btn:focus {
