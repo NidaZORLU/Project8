@@ -1,84 +1,53 @@
-const {
-    src,
-    dest,
-    parallel,
-    series,
-    watch
-} = require('gulp');
-
-const uglify = require('gulp-uglify');
-const autoprefixer = require('autoprefixer');
-const cssnano = require('cssnano');
-const concat = require('gulp-concat');
-const changed = require('changed');
-const browsersync = require('browser-sync').create();
-const del = require('del')
 const gulp = require('gulp');
+const uglify = require('gulp-uglify');
+const cleanCSS = require('gulp-clean-css');
+const concat = require('gulp-concat');
 const sass = require('gulp-sass');
 
+// gulp.task -> gorev olusturmak icin
+// gulp.src -> kaynak dosyalari
+// gulp.dest -> hedef dizinimiz
+// gulp.watch -> izleme ve gorev calistirma
+// pipe -> modify
 
-const dist = './dist'
-const source = './src';
+gulp.task('message',()=>{
+    console.log("Gulp running..");
+});
 
 
-function js() {
-    return src(source + '/assets/js/script.js')
-        .pipe(changed(source))
-        .pipe(concat('script.js'))
+gulp.task('kopyaHtml',()=>{
+    gulp.src('src/index.html')
+        .pipe(gulp.dest('./dist/'));
+})
+
+gulp.task('jsMin',()=>{
+    gulp.src('src/assets/js/script.js')
         .pipe(uglify())
-        .pipe(dest(dist + '/assets/js'))
-        .pipe(browsersync.stream());
-}
-
-
-function clean() {
-    return del([dist + '**', '!' + dist])
-}
-
-
-function css() {
-    return src(source + '/assets/css/style.css ')
-        .pipe(changed(source))
-        .pipe(autoprefixer({
-            overrideBrowserslist: ['last 2 versions'],
-            cascade: false
-        }))
-        .pipe(cssnano())
-        .pipe(dest(dist + '/assets/css'))
-        .pipe(browsersync.stream());
-}
-
-
-
-
-function htmlfiles() {
-    return src(source + '/index.html')
-        .pipe(dest(dist));
-}
-
-function watchFiles() {
-    watch(source + '/assets/css/style.css', css);
-    watch(source + '/asset/js/script.js', js);
-    watch(source + '/index.html', htmlfiles)
-}
-
-
-function browserSync() {
-    browsersync.init({
-        server: {
-            baseDir: dist
-        },
-        port: 3000
-    });
-}
-gulp.task('sass', ()=> {
-    return
-    gulp.src('/assets/sass/style.scss').pipe(sass()).pipe(gulp.dest('assets/css'));
+        .pipe(gulp.dest('./dist/js/'));
 });
-gulp.task('watch', () =>{
-    gulp.watch('/assets/sass/**/*.scss', gulp.series('sass'));
-});
-gulp.task('default', gulp.series('watch'));
 
-exports.watch = series(js, css, htmlfiles, parallel(watchFiles, browserSync));
-exports.default = series(clean, parallel(js, css, htmlfiles,));
+gulp.task('cssMin',()=>{
+    gulp.src('src/assets/css/style.css')
+        .pipe(cleanCSS())
+        .pipe(gulp.dest('./dist/css/'));
+});
+
+gulp.task('jsCon',()=>{
+    gulp.src('src/assets/js/script.js')
+        .pipe(concat('all.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('./dist/js'));
+});
+
+gulp.task('sass',()=>{
+    gulp.src('src/assets/sass/style.scss')
+        .pipe(sass())
+        .pipe(gulp.dest('./dist/css/'));
+});
+
+gulp.task('izle',()=>{
+    gulp.watch('src/assets/css/style.css']);
+    gulp.watch('src/assets/js/script.js']);
+})
+
+gulp.task('default',['message','imageMin','kopyaHtml','cssMin' ,'jsCon' , 'sass']);
