@@ -46,8 +46,8 @@ gulp.task('sass',()=>{
 });
 
 gulp.task('izle',()=>{
-    gulp.watch('src/assets/css/style.css']);
-    gulp.watch('src/assets/js/script.js']);
+    gulp.watch('src/assets/css/style.css');
+    gulp.watch('src/assets/js/script.js');
 })
 
 gulp.task('default',['message','imageMin','kopyaHtml','cssMin' ,'jsCon' , 'sass']);

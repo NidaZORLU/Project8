@@ -17,6 +17,8 @@
     "cssnano": "^5.0.8",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-sass": "^5.0.0",
     "image-min": "^0.3.2",
     "imagemin": "^8.0.1",
     "sass": "^1.39.0"
